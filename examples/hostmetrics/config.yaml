@@ -1,0 +1,93 @@
+processors:
+  metricsasattributes:
+    metrics_groups:
+      - name: foo
+        target_selectors:
+          spans:
+            - attribute_type: span
+              name: host.name
+        metrics_selectors:
+          - attribute_type: resource
+            name: host.name
+        metrics_to_add:
+          - instrumentation_scope: otelcol/hostmetrics*
+            metrics:
+              - name: system.memory.usage
+                match_attributes:
+                  state: used
+                new_name: system.memory.usage.used
+              - name: system.memory.usage
+                match_attributes:
+                  state: free
+                new_name: system.memory.usage.free
+
+  resourcedetection:
+    detectors: [env, system]
+    timeout: 2s
+    override: false
+    system:
+      hostname_sources: ["os"]
+
+  metricstransform:
+    transforms:
+      - include: system.memory.usage
+        experimental_match_labels: {state: "used"}
+        action: insert
+        new_name: "system.memory.usage.used"
+      - include: system.memory.usage
+        experimental_match_labels: {state: "free"}
+        action: insert
+        new_name: "system.memory.usage.free"
+      - include: system.memory.usage
+        experimental_match_labels: {state: "inactive"}
+        action: insert
+        new_name: "system.memory.usage.inactive"
+
+  filter:
+    metrics:
+      exclude:
+        match_type: strict
+        metric_names:
+          - system.memory.usage
+
+receivers:
+  hostmetrics:
+    collection_interval: 10s
+    scrapers:
+      memory:
+
+  otlp:
+    protocols:
+      http:
+      grpc:
+
+exporters:
+  debug:
+    verbosity: detailed
+
+  otlp:
+    endpoint: "api.honeycomb.io:443"
+    headers:
+      "x-honeycomb-team": ${env:HONEYCOMB_API_KEY}
+      "x-honeycomb-dataset": "metrics-test"
+
+service:
+  telemetry:
+    logs:
+      level: debug
+
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [metricsasattributes]
+      exporters: [debug, otlp]
+
+    metrics:
+      receivers: [hostmetrics]
+      processors: [resourcedetection, metricsasattributes]
+      exporters: [debug, otlp]
+
+    logs:
+      receivers: [otlp]
+      processors: [metricsasattributes]
+      exporters: [debug, otlp]

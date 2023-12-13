@@ -1,0 +1,45 @@
+metricsasattributes:
+  # time before state metrics are removed from cache (default 5m)
+  cache_ttl: 5m
+
+  metrics_groups:
+    # name of the group (must be unique across all groups)
+    - name: arbritrary_name
+
+      # This will create a single unique string with all the attributes
+      # order is important
+      # e.g. k8s.pod.name="pod1",k8s.namespace.name="namespace1"
+      # would result in pod1,namespace1
+      target_selectors:
+        spans:
+          - attribute_type: resource
+            name: k8s.pod.name
+          - attribute_type: resource
+            name: k8s.namespace.name
+        logs:
+          - attribute_type: resource
+            name: k8s.pod.name
+          - attribute_type: resource
+            name: k8s.namespace.name
+
+      # This will create a single unique string with all the attributes
+      # order is important
+      # e.g. k8s.pod.name="pod1",k8s.namespace.name="namespace1"
+      # would result in pod1,namespace1
+      metrics_selector:
+        - attribute_type: resource
+          name: k8s.pod.name
+        - attribute_type: resource
+          name: k8s.namespace.name
+
+      metrics_to_add:
+        - instrumentation_scope: otelcol/hostmetrics*
+          metrics:
+            - name: system.cpu.usage
+              include_only_attributes: {cpu: total, state: user}
+            - name: system.memory.usage
+              include_only_attributes: {state: used}
+              new_name: system.memory.usage.used
+        - instrumentation_scope: jvm
+          metrics:
+            - name: jvm.*

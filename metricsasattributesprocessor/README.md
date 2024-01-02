@@ -23,7 +23,7 @@ Spans (or logs) that need to have the metrics attributes added will be routed to
 this Collector instance. You can do the filter processor, and mulitple pipelines
 to route spans (or logs) accordingly.
 
-> **Warning:**
+> [!WARNING]
 > Using this processor with a Collector instance that is deployed in a cluster
 > behind a load balancer is not recommended.
 

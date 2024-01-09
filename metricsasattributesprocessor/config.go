@@ -1,7 +1,7 @@
 package metricsasattributesprocessor
 
 import (
-	"github.com/honeycombio/metricsasattributesprocessor/internal/common"
+	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
 	"time"
 )
 

@@ -2,8 +2,8 @@ package metricsasattributesprocessor
 
 import (
 	"context"
-	"github.com/honeycombio/metricsasattributesprocessor/internal/cache"
-	"github.com/honeycombio/metricsasattributesprocessor/internal/common"
+	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/cache"
+	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
 	"go.opentelemetry.io/collector/pdata/pcommon"
 	"go.opentelemetry.io/collector/pdata/pmetric"
 	"go.opentelemetry.io/collector/pdata/ptrace"

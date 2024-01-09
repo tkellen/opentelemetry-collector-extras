@@ -1,7 +1,7 @@
 package cache
 
 import (
-	"github.com/honeycombio/metricsasattributesprocessor/internal/common"
+	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
 	"go.opentelemetry.io/collector/pdata/pmetric"
 	"go.uber.org/zap"
 	"sync"

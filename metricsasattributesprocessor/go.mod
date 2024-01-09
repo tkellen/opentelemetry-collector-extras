@@ -1,4 +1,4 @@
-module github.com/honeycombio/metricsasattributesprocessor
+module github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor
 
 go 1.20
 

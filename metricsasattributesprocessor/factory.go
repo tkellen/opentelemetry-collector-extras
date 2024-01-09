@@ -9,7 +9,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/honeycombio/metricsasattributesprocessor/internal/metadata"
+	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/metadata"
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/consumer"
 	"go.opentelemetry.io/collector/processor"

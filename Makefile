@@ -1,23 +1,21 @@
 IMAGE_REPOSITORY ?= "otelcol-custom"
 IMAGE_TAG ?= "latest"
 
-.PHONY: build
-build:
+.PHONY: build-local
+build-local:
 	builder --config=ocb.yaml
 
-.PHONY: build-and-push-dockerhub
-build-and-push-dockerhub: build
+.PHONY: build
+build:
 	docker build -t $(IMAGE_REPOSITORY):$(IMAGE_TAG) .
+
+.PHONY: build-and-push
+build-and-push: build
 	docker push $(IMAGE_REPOSITORY):$(IMAGE_TAG)
 
-# This is required to build a proper executable that can be included in a docker image for an arm64 architecture K8s cluster
-.PHONY: build-arm
-build-arm:
-	env GOOS=linux GOARCH=arm64 builder --config=ocb.yaml
-
-.PHONY: build-arm-and-push-dockerhub
-build-arm-and-push-dockerhub: build-arm
-	docker buildx build --push --platform linux/arm/v7,linux/arm64/v8 -t $(IMAGE_REPOSITORY):$(IMAGE_TAG) .
+.PHONY: build-and-push-multiarch
+build-and-push-multiarch:
+	docker buildx build --push --platform linux/amd64,linux/arm64 -t $(IMAGE_REPOSITORY):$(IMAGE_TAG) .
 
 .PHONY: run
 run:

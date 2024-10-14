@@ -1,4 +1,4 @@
-FROM golang:1.21-bullseye as builder
+FROM golang:1.22-bullseye AS builder
 RUN go install go.opentelemetry.io/collector/cmd/builder@latest
 
 WORKDIR /
@@ -9,7 +9,7 @@ COPY ocb.yaml ./ocb.yaml
 RUN CGO_ENABLED=0 builder --config=ocb.yaml
 
 
-FROM alpine:3.16 as certs
+FROM alpine:3.16 AS certs
 RUN apk --update add ca-certificates
 
 

@@ -2,6 +2,7 @@ package metricsasattributesprocessor
 
 import (
 	"context"
+
 	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/cache"
 	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
 	"go.opentelemetry.io/collector/pdata/pcommon"
@@ -18,7 +19,7 @@ type logsProcessor struct {
 	logger *zap.Logger
 }
 
-func newLogsProcessor(set processor.CreateSettings, cfg *Config) (*logsProcessor, error) {
+func newLogsProcessor(set processor.Settings, cfg *Config) (*logsProcessor, error) {
 	p := &logsProcessor{
 		config: cfg,
 		cache:  cache.GetCache(set.ID.String(), cfg.CacheTtl, cfg.MetricGroups, set.Logger),

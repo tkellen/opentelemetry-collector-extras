@@ -2,6 +2,7 @@ package metricsasattributesprocessor
 
 import (
 	"context"
+
 	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/cache"
 	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
 	"go.opentelemetry.io/collector/pdata/pcommon"

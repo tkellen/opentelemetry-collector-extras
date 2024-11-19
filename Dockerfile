@@ -2,7 +2,7 @@ FROM --platform=$BUILDPLATFORM golang:1.22-bullseye AS builder
 ARG TARGETOS
 ARG TARGETARCH
 
-RUN go install go.opentelemetry.io/collector/cmd/builder@latest
+RUN go install go.opentelemetry.io/collector/cmd/builder@v0.111.0
 
 WORKDIR /
 

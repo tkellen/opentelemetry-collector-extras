@@ -19,8 +19,9 @@ processors:
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor v0.114.0
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/routingprocessor v0.114.0
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/transformprocessor v0.114.0
-  - gomod: github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor v0.3.0
+  - gomod: github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor v0.4.0
     path: metricsasattributesprocessor
+
 receivers:
   - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.114.0
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver v0.114.0

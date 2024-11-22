@@ -3,7 +3,9 @@ name: Docker
 on:
   workflow_dispatch:
   release:
-    types: [published]
+    types: ["published"]
+    tags: ["[0-9]+.*"]
+
   workflow_call:
     inputs:
       dockerhub_repo:

@@ -62,6 +62,8 @@ func (tp *tracesProcessor) addMetricsToSpan(r pcommon.Resource, is pcommon.Instr
 					case pmetric.NumberDataPointValueTypeInt:
 						s.Attributes().PutInt(k, v.DataPoint.IntValue())
 						added++
+					default:
+						// unsupported type do nothing
 					}
 				}
 				mmc.Mutex.RUnlock()

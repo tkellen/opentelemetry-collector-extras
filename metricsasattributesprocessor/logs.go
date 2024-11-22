@@ -62,6 +62,8 @@ func (lp *logsProcessor) addMetricsToLog(r pcommon.Resource, is pcommon.Instrume
 					case pmetric.NumberDataPointValueTypeInt:
 						l.Attributes().PutInt(k, v.DataPoint.IntValue())
 						added++
+					default:
+						// unsupported type do nothing
 					}
 				}
 				mmc.Mutex.RUnlock()

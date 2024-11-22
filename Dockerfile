@@ -2,7 +2,7 @@ FROM --platform=$BUILDPLATFORM golang:1.22-bullseye AS builder
 ARG TARGETOS
 ARG TARGETARCH
 
-RUN go install go.opentelemetry.io/collector/cmd/builder@v0.111.0
+RUN go install go.opentelemetry.io/collector/cmd/builder@v0.114.0
 
 WORKDIR /
 
@@ -11,10 +11,8 @@ COPY ocb.yaml ./ocb.yaml
 
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} builder --config=ocb.yaml
 
-
 FROM --platform=$BUILDPLATFORM alpine:3.16 AS certs
 RUN apk --update add ca-certificates
-
 
 FROM scratch
 

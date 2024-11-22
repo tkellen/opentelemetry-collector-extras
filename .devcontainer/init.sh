@@ -2,7 +2,7 @@
 # OpenTelemetry Collector Builder
 go install go.opentelemetry.io/collector/cmd/builder@latest
 # OpenTelemetry Collector Metadata Generator
-go install github.com/open-telemetry/opentelemetry-collector-contrib/cmd/mdatagen@latest
+go install go.opentelemetry.io/collector/cmd/mdatagen@latest
 
 # Go remote debugger
 go install github.com/go-delve/delve/cmd/dlv@latest

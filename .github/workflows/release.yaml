@@ -5,7 +5,6 @@ on:
   release:
     types: ["published"]
     tags: ["[0-9]+.*"]
-
   workflow_call:
     inputs:
       dockerhub_repo:
@@ -52,6 +51,17 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Generate Docker metadata
+        id: docker_metatdata
+        uses: docker/metadata-action@v3
+        with:
+          images:
+            - ghcr.io/${{ github.repository }}/otelcol-custom
+            - puckpuck/otelcol-custom
+          tags:
+            - type=raw,value=${{ github.ref_name }}
+            - type=raw,value=latest
+
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
@@ -61,10 +71,6 @@ jobs:
           context: .
           platforms: linux/arm64,linux/amd64
           push: true
-          tags: |
-            ${{ inputs.dockerhub_repo }}:${{ github.event.release.tag_name }}
-            ${{ inputs.dockerhub_repo }}:latest
-            ${{ inputs.ghcr_repo }}:${{ github.event.release.tag_name }}
-            ${{ inputs.ghcr_repo }}:latest
+          tags: ${{ steps.docker_metatdata.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha

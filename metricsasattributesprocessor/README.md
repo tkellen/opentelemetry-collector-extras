@@ -63,7 +63,7 @@ specify which metrics will be cached and added.
         # order is important
         # e.g. k8s.pod.name="pod1",k8s.namespace.name="namespace1" 
         # would result in pod1,namespace1
-        metrics_selector:
+        metrics_selectors:
           - attribute_type: resource
             name: k8s.pod.name
           - attribute_type: resource

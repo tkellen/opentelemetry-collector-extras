@@ -10,7 +10,7 @@ processors:
           - attribute_type: resource
             name: host.name
         metrics_to_add:
-          - instrumentation_scope: otelcol/hostmetrics*
+          - instrumentation_scope: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver*
             metrics:
               - name: system.memory.usage
                 match_attributes:

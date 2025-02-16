@@ -99,11 +99,15 @@ config:
             spans:
               - attribute_type: resource
                 name: k8s.pod.name
+              - attribute_type: resource
+                name: k8s.namespace.name
           metrics_selectors:
             - attribute_type: resource
               name: k8s.pod.name
+            - attribute_type: resource
+              name: k8s.namespace.name
           metrics_to_add:
-            - instrumentation_scope: otelcol/kubeletstatsreceiver
+            - instrumentation_scope: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kubeletstatsreceiver
               metrics:
                 - name: "k8s.pod.*"
 
@@ -116,7 +120,7 @@ config:
             - attribute_type: resource
               name: k8s.node.name
           metrics_to_add:
-            - instrumentation_scope: otelcol/kubeletstatsreceiver
+            - instrumentation_scope: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kubeletstatsreceiver
               metrics:
                 - name: "k8s.node.*"
 

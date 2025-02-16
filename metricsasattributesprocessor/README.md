@@ -41,7 +41,7 @@ specify which metrics will be cached and added.
 
     metrics_groups:
       # name of the group (must be unique across all groups)
-      - name: arbritrary_name
+      - name: k8s_pod
 
         # This will create a single unique string with all the attributes
         # order is important
@@ -70,14 +70,10 @@ specify which metrics will be cached and added.
             name: k8s.namespace.name
 
         metrics_to_add:
-          - instrumentation_scope: otelcol/hostmetrics*
+          - instrumentation_scope: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kubeletstatsreceiver
             metrics:
-              - name: system.cpu.usage
-                include_only_attributes: {cpu: total, state: user}
-              - name: system.memory.usage
-                include_only_attributes: {state: used}
-                new_name: system.memory.usage.used
-          - instrumentation_scope: jvm
+              - name: "k8s.pod.*"
+          - instrumentation_scope: io.opentelemetry.runtime-telemetry-java*
             metrics:
               - name: jvm.*
               

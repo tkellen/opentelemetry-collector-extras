@@ -1,5 +1,10 @@
-IMAGE_REPOSITORY ?= "otelcol-custom"
+IMAGE_REPOSITORY ?= "ghcr.io/puckpuck/opentelemetery-collector-extras/otelcol-custom"
 IMAGE_TAG ?= "latest"
+
+.PHONY: install-builder
+install-builder:
+	go install go.opentelemetry.io/collector/cmd/builder@latest
+	go install go.opentelemetry.io/collector/cmd/mdatagen@latest
 
 .PHONY: build-local
 build-local:

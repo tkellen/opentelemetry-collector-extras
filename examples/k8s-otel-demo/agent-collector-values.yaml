@@ -3,7 +3,7 @@ mode: daemonset
 fullnameOverride: otelcol
 
 image:
-  repository: puckpuck/otelcol-custom
+  repository: tkellen/otelcol-custom
   tag: latest
   pullPolicy: Always
 

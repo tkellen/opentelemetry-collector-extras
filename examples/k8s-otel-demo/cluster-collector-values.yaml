@@ -3,7 +3,7 @@ mode: deployment
 fullnameOverride: otelcol-cluster
 
 image:
-  repository: puckpuck/otelcol-custom
+  repository: tkellen/otelcol-custom
   tag: latest
   pullPolicy: Always
 

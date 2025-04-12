@@ -3,8 +3,8 @@ package metricsasattributesprocessor
 import (
 	"context"
 
-	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/cache"
-	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
+	"github.com/tkellen/opentelemetry-collector-extras/metricsasattributesprocessor/internal/cache"
+	"github.com/tkellen/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
 	"github.com/vodkaslime/wildcard"
 	"go.opentelemetry.io/collector/pdata/pcommon"
 	"go.opentelemetry.io/collector/pdata/pmetric"

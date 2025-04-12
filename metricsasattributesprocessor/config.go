@@ -1,8 +1,9 @@
 package metricsasattributesprocessor
 
 import (
-	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
 	"time"
+
+	"github.com/tkellen/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
 )
 
 type Config struct {

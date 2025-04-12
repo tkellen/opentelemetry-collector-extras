@@ -1,7 +1,7 @@
 package metricsasattributesprocessor
 
 import (
-	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
+	"github.com/tkellen/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
 	"go.opentelemetry.io/collector/pdata/pcommon"
 )
 

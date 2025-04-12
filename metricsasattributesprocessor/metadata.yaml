@@ -6,4 +6,4 @@ status:
     development: [traces, metrics, logs]
   distributions: [honeycomb]
   codeowners:
-    active: [puckpuck, McSick, martinjt]
+    active: [tkellen, McSick, martinjt]

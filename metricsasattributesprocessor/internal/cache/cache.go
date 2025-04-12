@@ -1,11 +1,12 @@
 package cache
 
 import (
-	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
-	"go.opentelemetry.io/collector/pdata/pmetric"
-	"go.uber.org/zap"
 	"sync"
 	"time"
+
+	"github.com/tkellen/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
+	"go.opentelemetry.io/collector/pdata/pmetric"
+	"go.uber.org/zap"
 )
 
 type Metric struct {

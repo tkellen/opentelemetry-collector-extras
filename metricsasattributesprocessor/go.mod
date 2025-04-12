@@ -1,4 +1,4 @@
-module github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor
+module github.com/tkellen/opentelemetry-collector-extras/metricsasattributesprocessor
 
 go 1.22.0
 

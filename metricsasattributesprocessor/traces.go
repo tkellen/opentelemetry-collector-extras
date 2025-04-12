@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/cache"
-	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
 	"go.opentelemetry.io/collector/pdata/pcommon"
 	"go.opentelemetry.io/collector/pdata/pmetric"
 	"go.opentelemetry.io/collector/pdata/ptrace"
@@ -47,7 +46,7 @@ func (tp *tracesProcessor) processTraces(_ context.Context, td ptrace.Traces) (p
 func (tp *tracesProcessor) addMetricsToSpan(r pcommon.Resource, is pcommon.InstrumentationScope, s ptrace.Span) {
 	for _, configMG := range tp.config.MetricGroups {
 
-		if id, ok := tp.isSelectableSpan(configMG, r, is, s.Attributes()); ok {
+		if id, ok := isSelectable(configMG.TargetSelectors.SpansSelectors, r, is, s.Attributes()); ok {
 			added := 0
 			cacheMG := tp.cache.MetricGroups[configMG.Name]
 			cacheMG.Mutex.RLock()
@@ -74,32 +73,4 @@ func (tp *tracesProcessor) addMetricsToSpan(r pcommon.Resource, is pcommon.Instr
 			cacheMG.Mutex.RUnlock()
 		}
 	}
-}
-
-func (tp *tracesProcessor) isSelectableSpan(mg common.MetricGroup, r pcommon.Resource, is pcommon.InstrumentationScope, spanAttrs pcommon.Map) (id string, ok bool) {
-	id = ""
-	for _, ms := range mg.TargetSelectors.SpansSelectors {
-		switch ms.AttributeType {
-		case common.AttributeTypeResource:
-			if s, ok := r.Attributes().Get(ms.Name); ok {
-				id += s.AsString() + MatcherDelim
-			} else {
-				return "", false
-			}
-		case common.AttributeTypeScope:
-			if s, ok := is.Attributes().Get(ms.Name); ok {
-				id += s.AsString() + MatcherDelim
-			} else {
-				return "", false
-			}
-		case common.AttributeTypeSpan:
-			if s, ok := spanAttrs.Get(ms.Name); ok {
-				id += s.AsString() + MatcherDelim
-			} else {
-				return "", false
-			}
-		}
-	}
-
-	return id, true
 }

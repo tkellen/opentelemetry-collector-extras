@@ -47,7 +47,7 @@ func (lp *logsProcessor) processLogs(_ context.Context, ld plog.Logs) (plog.Logs
 func (lp *logsProcessor) addMetricsToLog(r pcommon.Resource, is pcommon.InstrumentationScope, l plog.LogRecord) {
 	for _, configMG := range lp.config.MetricGroups {
 
-		if id, ok := lp.isSelectableLog(configMG, r, is, l.Attributes()); ok {
+		if id, ok := isSelectable(configMG.TargetSelectors.LogsSelectors, r, is, l.Attributes()); ok {
 			added := 0
 			cacheMG := lp.cache.MetricGroups[configMG.Name]
 			cacheMG.Mutex.RLock()

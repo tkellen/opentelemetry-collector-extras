@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/cache"
+	"github.com/puckpuck/opentelemetry-collector-extras/metricsasattributesprocessor/internal/common"
 	"go.opentelemetry.io/collector/pdata/pcommon"
 	"go.opentelemetry.io/collector/pdata/pmetric"
 	"go.opentelemetry.io/collector/pdata/ptrace"
@@ -46,7 +47,7 @@ func (tp *tracesProcessor) processTraces(_ context.Context, td ptrace.Traces) (p
 func (tp *tracesProcessor) addMetricsToSpan(r pcommon.Resource, is pcommon.InstrumentationScope, s ptrace.Span) {
 	for _, configMG := range tp.config.MetricGroups {
 
-		if id, ok := isSelectable(configMG.TargetSelectors.SpansSelectors, r, is, s.Attributes()); ok {
+		if id, ok := common.IsSelectable(configMG.TargetSelectors.SpansSelectors, r, is, s.Attributes()); ok {
 			added := 0
 			cacheMG := tp.cache.MetricGroups[configMG.Name]
 			cacheMG.Mutex.RLock()

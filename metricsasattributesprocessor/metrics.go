@@ -92,7 +92,7 @@ func (mp *metricsProcessor) isMatchedMetric(mg common.MetricGroup, name string, 
 	// if this metric does not have the necessary attributes, we can skip it
 	// an id is created by concatenating the values of the attributes selected for the metric group which will
 	// be used to identify the MatchedMetricsCache for this metric group
-	id, _ = isSelectable(mg.MetricsSelectors, r, is, metricAttrs)
+	id, _ = common.IsSelectable(mg.MetricsSelectors, r, is, metricAttrs)
 
 	for _, mm := range mg.MetricsMatchers {
 		if match, _ := mp.wildcardMatcher.Match(mm.InstrumentationScope, is.Name()); match {
